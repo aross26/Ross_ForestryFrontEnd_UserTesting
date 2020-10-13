@@ -1,0 +1,92 @@
+<!doctype html>
+<!--[if lt IE 9]>  <html class="ie lt-ie9 ie8"> <![endif]-->
+<!--[if IE 9]>     <html class="ie ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Forestry Management in the Mississippi River Floodplain</title>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- get calcite-web css from the cdn (use latest version) -->
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.17/"></script>
+    <!--[if lt IE 9]>
+      <script src="/assets/javascripts/libs/selectivizr.js"></script>
+      <script src="/assets/javascripts/libs/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+        html,
+        body,
+        #mapDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.17/"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- top navigation -->
+        <header class="top-nav">
+            <div class="grid-container">
+                <div class="column-24">
+                    <a id="topnav" href="#" class="top-nav-title">U.S Army Corps of Engineers | St. Paul, Rock Island, St. Louis Districts</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- banner -->
+        <div class="panel panel-blue trailer-2">
+            <div class="grid-container">
+                <div class="column-24 leader-2 trailer-2">
+                    <h1>Forestry Management in the Mississippi River Floodplain</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- main content -->
+    <div class="column-24 pre-1">
+        <h2 class="leader-1">Introduction</h2>
+        <p>What is forest inventory?</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h2 class="leader-1">What Data Do We Collect?</h2>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h4>Example: Tree Ages in the Pecan Grove Unit, IL</h4>
+        <div id="mapDiv"></div>
+
+        <h2 class="leader-1">Plots</h2>
+        <p>What are the differences between age plots, prism plots, and fixed-radius plots?</p>
+        <p>Why use all three?</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h4 id="agePlot" class="indent">Age Plots</h4>
+        <p class="indent">How are tree ages determined? How accurate is it? What does this information tell us about the area? How does this influence stand management?</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h4 id="prismPlot" class="indent">Prism Plots</h4>
+        <p class="indent">What is a prism, and how is it used? What are the benefits to using a prism plot over a fixed-radius plot?</p>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h4 id="fixedPlot" class="leader-1 indent">Fixed-Radius Plots</h4>
+        <p>How is a fixed-radius plot different from a prism plot? Is the same data collected in both plots? Why use a fixed-radius plot over a prism plot?</p>
+        <p class="indent">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+        <h2 class="leader-1">How is This Inventory Data Used?</h2>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+    </div>
+
+    <!-- scripts -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
