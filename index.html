@@ -11,21 +11,39 @@
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Forestry Management in the Mississippi River Floodplain</title>
     <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Load Leaflet from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.5.0/dist/esri-leaflet.js"
+            integrity="sha512-ucw7Grpc+iEQZa711gcjgMBnmd9qju1CICsRaryvX7HJklK0pGl/prxKvtHwpgm5ZHdvAil7YPxI1oWPOWK3UQ=="
+            crossorigin=""></script>
+
     <!-- get calcite-web css from the cdn (use latest version) -->
     <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
     <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/css/main.css">
+
     <script src="https://js.arcgis.com/4.17/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+
     <!--[if lt IE 9]>
-      <script src="/assets/javascripts/libs/selectivizr.js"></script>
-      <script src="/assets/javascripts/libs/html5shiv.js"></script>
+    <script src="/assets/javascripts/libs/selectivizr.js"></script>
+    <script src="/assets/javascripts/libs/html5shiv.js"></script>
     <![endif]-->
+
     <style>
         html,
         body,
         #mapDiv {
             padding: 0;
             margin: 0;
-            height: 100%;
+            height: 20%;
             width: 100%;
         }
     </style>
@@ -34,59 +52,304 @@
     <script src="https://js.arcgis.com/4.17/"></script>
 
 </head>
-
 <body>
-    <div class="wrapper">
-        <!-- top navigation -->
-        <header class="top-nav">
-            <div class="grid-container">
-                <div class="column-24">
-                    <a id="topnav" href="#" class="top-nav-title">U.S Army Corps of Engineers | St. Paul, Rock Island, St. Louis Districts</a>
-                    </nav>
-                </div>
-            </div>
-        </header>
 
-        <!-- banner -->
-        <div class="panel panel-blue trailer-2">
-            <div class="grid-container">
-                <div class="column-24 leader-2 trailer-2">
-                    <h1>Forestry Management in the Mississippi River Floodplain</h1>
-                </div>
+<div class="wrapper">
+    <!-- banner -->
+    <div class="panel panel-blue trailer-2">
+        <div class="grid-container">
+            <div class="column-24 leader-2 trailer-2">
+                <h1>Forestry Management in the Mississippi River Floodplain</h1>
+                <h4>U.S Army Corps of Engineers | St. Paul, Rock Island, St. Louis Districts</h4>
             </div>
         </div>
     </div>
 
-    <!-- main content -->
-    <div class="column-24 pre-1">
-        <h2 class="leader-1">Introduction</h2>
-        <p>What is forest inventory?</p>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h2 class="leader-1">What Data Do We Collect?</h2>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h4>Example: Tree Ages in the Pecan Grove Unit, IL</h4>
-        <div id="mapDiv"></div>
+    <!-- top navigation
+    <header class="top-nav">
+        <div class="grid-container">
+            <div class="column-24">
+                <a id="topnav" href="#" class="top-nav-title">U.S Army Corps of Engineers | St. Paul, Rock Island, St. Louis Districts</a>
+                </nav>
+            </div>
+        </div>
+    </header> -->
+</div>
 
-        <h2 class="leader-1">Plots</h2>
-        <p>What are the differences between age plots, prism plots, and fixed-radius plots?</p>
-        <p>Why use all three?</p>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h4 id="agePlot" class="indent">Age Plots</h4>
-        <p class="indent">How are tree ages determined? How accurate is it? What does this information tell us about the area? How does this influence stand management?</p>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h4 id="prismPlot" class="indent">Prism Plots</h4>
-        <p class="indent">What is a prism, and how is it used? What are the benefits to using a prism plot over a fixed-radius plot?</p>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h4 id="fixedPlot" class="leader-1 indent">Fixed-Radius Plots</h4>
-        <p>How is a fixed-radius plot different from a prism plot? Is the same data collected in both plots? Why use a fixed-radius plot over a prism plot?</p>
-        <p class="indent">Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
-        <h2 class="leader-1">How is This Inventory Data Used?</h2>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed odio dui. Maecenas faucibus mollis interdum.</p>
+<!-- main content -->
+<div class="column-24 pre-1">
+    <h2 class="leader-1">Introduction</h2>
+    <h4 style="color:#00619b;">What is forest inventory?</h4>
+    <p>Taking forest inventory is similar to taking inventory in a store: it’s the process of carefully identifying, counting, and measuring all the trees (and sometimes other species, such as shrubs or ground cover) within a given area, or plot. Plots are typically spread throughout the forest in a grid pattern. Spacing the plots out evenly like this allows foresters to get a good idea of what is going on in a forest without needing to measure each individual tree. Because forests change over time inventories are often repeated, using the same plot locations, every 5 to 10 years. Inventories are most useful when repeated because then foresters can begin to see changes over time and adjust how they manage the forest based on those changes. For example, if the forest is getting too crowded, a forester may recommend less healthy trees be thinned out to allow the healthiest trees to have more growing space.</p>
+    <h4 style="color:#00619b; "class="leader-1">What Data Do We Collect?</h4>
+    <p>In addition to identifying the tree species, foresters also measure each tree in several ways. This includes estimating the tree’s height, measuring its diameter, gauging its general health (is it very healthy? Or is its health declining, even dead?), and noting where it sits in the canopy (is it one of the tallest around, shading out smaller trees? Is it one of the trees being shaded out?). In some plots, around 10% of the total number, one tree will also have a core sample taken to estimate its age. Each plot will also have the “openness” of its canopy assessed (i.e. how much of the sky is visible between the trees).</p>
+    <p>As mentioned above, foresters aren’t only interested in the trees. If there are shrubs, ground cover, or other rare plant species present in the plot, these will often have their presence recorded as well. Some common examples include shrubs like red/white mulberry or buttonbush, and ground cover species such as wood nettles, poison ivy, and grape vine.</p>
+
+    <h3 class="leader-1">Explore!</h3>
+    <p>This is an example of the data collected from a forest inventory of the Pecan Grove unit, just north of Quincy, IL.</p>
+    <p>How to use:
+    <br>-	Toggle data layers on and off using the "eye" icons in the top right corner
+    <br>-	Click on a point to bring up more information about it
+    <br>-	Zoom in to see more detail
+    <br>-	Use the icon in the bottom-left corner to switch to satellite imagery</br>
+    <div id="mapDiv"></div>
+
+    <h2 class="leader-1">Plots</h2>
+    <h4 style="color:#00619b;">Are there different types of plots?</h4>
+    <p>Yes. Foresters use a combination of three types of plots when conducting a forest inventory. The first two, prism plots and fixed-radius plots, refer to the way the size of the plot is determined. The third type, age plots, refer to the fact that an additional piece of information (a tree’s age) will be collected at that plot. An age plot can be either a prism or fixed-radius plot.</p>
+
+    <h3 id="fixedPlot" class="leader-1 indent">Fixed-Radius Plots</h3>
+    <h4 style="color:#00619b;">What is a fixed-radius plot?</h4>
+    <p>A fixed-radius plot is a circular plot, usually 1/10th of an acre in size. Using a measuring tape fixed to plot center, the forester will work their way around the plot, counting every tree. As long as the center of a tree is within the plot radius, it will be counted – the entire tree does not need to be inside the plot. This is one of the most commonly used methods for conducting a forest inventory.</p>
+
+    <h4 style="color:#00619b;">Why use a fixed-radius plot over a prism plot?</h4>
+    <p>With a fixed-radius plot, it’s easy to determine which trees are “in” or “out” of the plot. Because the plot boundaries are fixed, comparing inventories from year to year (or decade to decade) is straightforward and you can form a clear picture of how this exact part of the forest has changed over time.</p>
+    <p>Because every tree in the plot is counted, completing an inventory can be time consuming if the plot is full of many small trees. To combat this problem, sometimes inventories will set limits on the size of tree to be counted – only trees over 4” in diameter, for example.</p>
+
+
+    <h3 id="prismPlot" class="indent">Prism Plots</h3>
+    <h4 style="color:#00619b;">What is a prism, and how is it used?</h4>
+    <p>A prism is a small wedge-shaped piece of glass, often used to refract light. Forestry prisms are made in several different sizes each capable of measuring a different sized plot. To use one, the forester stands in the exact center of the plot and looks through the prism, holding it a specific distance away from their face. If a tree’s trunk overlaps with the image of the trunk in the prism, the tree is considered “in” the plot and it is counted. If the trunk and the image of the trunk do not overlap, the tree is “out” and it is not counted. With this system, the further away from center a tree is the larger its diameter must be for it to be “in.”</p>
+    <p>See below for an example of what it looks like to use a prism. Image courtesy of the Alabama Cooperative Extension System. Click <a href="https://www.aces.edu/blog/topics/forest-resiliency/benefits-drawbacks-to-variable-radius-plots/">here</a> for their full in-depth discussion of prism plots.</p>
+    <div class="column-14 center-column">
+        <img src="img/prism.jpg" alt="Using a prism">
+        <p>Figure 4: The tree and its image in the prism overlap, so this tree is in.</p>
+        <p>Figure 5: This tree is borderline. It will need to have its diameter and distance from plot center carefully measured to determine whether it is in or out.</p>
+        <p>Figure 6: This tree has no overlap, so it is out.</p>
     </div>
 
-    <!-- scripts -->
-    <script src="js/main.js"></script>
+    <p></p>
+    <h4 style="color:#00619b;">What are the benefits and downsides to using a prism plot over a fixed-radius plot?</h4>
+    <p>Prism plots can often be completed faster than a fixed-radius plot because the decision of whether or not to count a tree can be made within seconds. They are also better suited to stands composed primarily of larger trees, which is often the case in bottomland forests along the Mississippi River.</p>
+    <p>One of the primary downsides to using prism plots is that they rely on line-of-sight. In a plot with thick brush or simply a lot of trees, obtaining a clear view of each tree through the prism can be difficult. Additionally, borderline trees take additional measuring and math to determine if they should be counted. If there are many borderline trees in a plot, sampling may take longer than in a fixed-radius plot</p>
+
+    <h4 style="color:#00619b;">Is the same data collected in both plots?</h4>
+    <p>Yes, typically the same data is collected in both types of plot. However because the methods are different for determining which trees to count within each plot, the inventories from each type are usually kept separate and analyzed in slightly different ways. Fixed-radius plots are better suited for calculating the total number of trees per acre, while prism plots are better for calculating the total volume of wood (or “basal area”) per acre.</p>
+
+
+    <h3 id="agePlot" class="indent">Age Plots</h3>
+    <h4 style="color:#00619b;">How are tree ages determined?</h4>
+    <p>To measure the age of a tree, we must count its rings. The easiest way to get to the rings is to cut the tree down, but that is time-consuming, dangerous, and requires foresters to bring along extra equipment. Rather than cut down every tree whose age we want to measure, foresters use a specialized tool called an increment borer to drill into the tree and extract a small, pencil-sized sample of its wood. The rings on the sample can be counted and recorded immediately but depending on the tree species or the condition of the sample, the rings may be difficult to see. In that case, the sample can later be processed in a lab where it will be carefully dried and examined under a microscope to better see the rings.</p>
+
+    <h4 style="color:#00619b;">How accurate is it?</h4>
+    <p>In areas with a clear distinction between growing and dormant seasons (such as here in North America and unlike areas close to the equator), as long as the rings in a sample are clear enough, it can be dated very precisely. If the rings in a sample are less clear, it can be compared to samples from other trees that grew in the same area. Trees that grew under the same weather conditions and were exposed to the same annual cycles of rain and drought will show the same patterns in their rings. By comparing the patterns of thick and thin rings, a broken or difficult to read sample can be compared to a sample of a known age. If the patterns match, you can then make a good estimate of the age of that tree.</p>
+    <p>Click <a href="http://www.pbs.org/time-team/experience-archaeology/dendrochronology/">here</a> to learn more about dendrochonology, the study of tree rings.</p>
+
+    <h4 style="color:#00619b;">What does this information tell us about the area?</h4>
+    <p>Based on the width of the growth rings we can make an assumption about the conditions the tree found itself in that year. Wide rings indicate that it was a good year for growing - likely the area received plenty of rain that year. Narrow rings indicate conditions that year were less favorable - maybe the tree faced drought or disease. While the information tree rings give us are all about the past, knowing the forest’s history can help us make more informed decisions about how we manage the forest in the future.</p>
+    <p>Check out this video from Brigham Young University to learn more about what tree rings can tell us about an area's history:</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/xmZO7aRgcW4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+    <h2 class="leader-1">How is This Inventory Data Used?</h2>
+    <p>First and foremost, having an accurate inventory of forest resources helps foresters design management plans that will best suit the tree species and conditions present in that forest. A plan designed for a forest of mature silver maple might not work as well in a forest composed mostly of young hickory and oak. </p>
+    <p>In addition, forestry can be an important component in larger projects. Habitat Rehabilitation and Enhancement Projects (HREPs, read more about them <a href="https://www.mvr.usace.army.mil/Missions/Environmental-Stewardship/Upper-Mississippi-River-Restoration/Habitat-Restoration/">here</a>) often incorporate forestry into the planning process when deciding how best to improve a degraded site. Even if the HREP doesn’t include forestry practices (such as tree thinning or planting) as part of the final project, knowing what condition the forested part of the project area is in may help inform decisions elsewhere in the project. </p>
+    <p>In the image below, you can see how many factors come together to help select a restoration project site. </p>
+    <p>First, there’s basal area: this is a measure of how many trees there are per acre, and how large they are. If the basal area is below target, that means the area has less than the ideal number of trees, or the trees that are there are still small. If the basal area is above the target then that area may need to be thinned out to allow the remaining trees more room to grow. </p>
+    <p>Second, by revisiting the same plots every few years, we can see how the site changes over time. A site that has maintained or grown its basal area is probably doing pretty well. But if it has lost basal area, especially by more than 25%, something might need to be done to prevent further loss. </p>
+    <p>Putting those two together we can start ranking areas in terms of restoration priority. An area that’s been gaining basal area and is now at or above the target probably will be a low priority for restoration work. However, an area that hasn’t been gaining or has lost basal area and is below or well below target is a perfect spot for some restoration! </p>
+
+    <img src="img/projectSelection.png" alt="Restoration project selection">
+</div>
+
+<script>
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Locate",
+        "esri/widgets/Home",
+        "esri/widgets/Editor",
+        "esri/widgets/Legend",
+        "esri/widgets/Expand",
+        "esri/widgets/LayerList",
+        "esri/widgets/BasemapToggle"
+    ], function(Map, MapView, FeatureLayer, Locate, Home, Editor, Legend, Expand, LayerList, BasemapToggle) {
+
+        // build map
+        var map = new Map({
+            basemap: "gray-vector" //"topo-vector"
+        });
+
+        // tree age
+        const ageLayer = new FeatureLayer({
+            url: "https://services7.arcgis.com/zv5PbHd04c1UNAiH/arcgis/rest/services/Forestry_Test/FeatureServer/2",
+            title: "Tree Age"
+        });
+        map.add(ageLayer);
+
+        ageLayer.popupTemplate = {
+            content: "{expression/treeAge}",
+            expressionInfos: [
+                {
+                    name: "treeAge",
+                    expression: `
+                    var age = round(2020-$feature.AGE_ORIG);
+
+                    return \`This tree has been growing since \${$feature.AGE_ORIG}.
+                    It is \${Text(age)} years old.\`
+                    `
+                }
+            ]
+        };
+
+        // tree health
+        const healthLayer = new FeatureLayer({
+            url: "https://services7.arcgis.com/zv5PbHd04c1UNAiH/arcgis/rest/services/Forestry_Test/FeatureServer/3",
+            title: "Tree Health",
+            popupTemplate: {
+                title: "This tree is {TR_HLTH}"
+            },
+
+        });
+        map.add(healthLayer);
+
+
+        const clusterConfig = {
+            type: "cluster",
+            clusterRadius: "30px",
+            // {cluster_count} is an aggregate field containing
+            // the number of features comprised by the cluster
+            popupTemplate: {
+                content: "This cluster represents {cluster_count} trees.",
+                fieldInfos: [{
+                    fieldName: "cluster_count",
+                    format: {
+                        places: 0,
+                        digitSeparator: true
+                    }
+                }]
+            },
+            clusterMinSize: "2px",
+            clusterMaxSize: "60px",
+            labelingInfo: [{
+                deconflictionStrategy: "none",
+                labelExpressionInfo: {
+                    expression: "Text($feature.cluster_count, '#,###')"
+                },
+                symbol: {
+                    type: "text",
+                    color: "#343434",
+                    font: {
+                        weight: "bold",
+                        family: "Noto Sans",
+                        size: "12px"
+                    }
+                },
+                labelPlacement: "center-center"
+            }]
+        };
+
+        const speciesLayer = new FeatureLayer({
+            url: "https://services7.arcgis.com/zv5PbHd04c1UNAiH/arcgis/rest/services/Forestry_Test/FeatureServer/4",
+            featureReduction: clusterConfig,
+            title: "Tree Species",
+            popupTemplate: {
+                title: "Species: {TR_SP}"
+            },
+
+        });
+        map.add(speciesLayer);
+
+        /*speciesLayer.featureReduction = {
+            type: "cluster",
+            clusterRadius: "60px",
+            popupTemplate: {
+                content: "This cluster represents <b>{cluster_count}</b> trees.",
+                fieldInfos: [{
+                    fieldName: "cluster_count",
+                    format: {
+                        digitSeparator: true,
+                        places: 0
+                    }
+                }]
+            },
+            clusterMinSize: "2px",
+            clusterMaxSize: "60px",
+            labelingInfo: [{
+                deconflictionStrategy: "none",
+                labelExpressionInfo: {
+                    expression: "Text($feature.cluster_count, '#,###')"
+                },
+                symbol: {
+                    type: "text",
+                    color: "#004a5d",
+                    font: {
+                        weight: "bold",
+                        family: "Noto Sans",
+                        size: "12px"
+                    }
+                },
+                labelPlacement: "center-center"
+            }]
+        };*/
+
+
+
+
+        // attach map to view
+        var view = new MapView({
+            container: "mapDiv",
+            map: map,
+            center: [-91.484, 40.094], // longitude, latitude
+            zoom: 13,
+            popup: {
+                defaultPopupTemplateEnabled: false,
+                dockEnabled: true,
+                dockOptions: {
+                    //buttonEnabled: false,
+                    //position: "top-right"
+                }
+            },
+        });
+
+        view.watch("scale", function(newValue) {
+            speciesLayer.featureReduction = newValue <= 10000 ? null : clusterConfig;
+        });
+
+        // layer list
+        var layerList = new LayerList({
+            view: view
+        });
+
+
+        // legend
+        var legend = new Legend({
+            view: view
+        });
+
+
+
+/*        // locate button
+        var locate = new Locate({
+            view: view,
+            useHeadingEnabled: false,
+            goToOverride: function (view, options) {
+                options.target.scale = 1500; // Override the default map scale
+                return view.goTo(options.target);
+            }
+        });*/
+
+        // basemap toggle
+        var basemapToggle = new BasemapToggle({
+            view: view,
+            nextBasemap: "satellite"
+        });
+
+        /// home button
+        var homeBtn = new Home({
+            view: view
+        });
+
+
+        // Add the buttons to the top left corner of the view
+        view.ui.add(basemapToggle, "bottom-left");
+        view.ui.add(homeBtn, "top-left");
+        view.ui.add(layerList, "top-right");
+        view.ui.add(legend, "top-right");
+
+    });
+</script>
 
 </body>
-
 </html>

@@ -8,14 +8,27 @@ require(["esri/Map",
     });
 
 
-    const layer = new FeatureLayer({
-        // URL to the service
+     const ageLayer = new FeatureLayer({
         url: "https://services7.arcgis.com/zv5PbHd04c1UNAiH/arcgis/rest/services/Forestry_Test/FeatureServer/2"
     });
+    map.add(ageLayer);
 
-    layer.popupTemplate = {
+    ageLayer.popupTemplate = {
         title: "This tree has been growing since {AGE_ORIG}"
     };
+
+    const speciesLayer = new FeatureLayer({
+        url: "https://services7.arcgis.com/zv5PbHd04c1UNAiH/arcgis/rest/services/Forestry_Test/FeatureServer/0",
+        featureReduction: clusterConfig,
+        // popupTemplates can still be viewed on
+        // individual features
+        popupTemplate: {
+            title: "Tree Species",
+            content: "{TR_SP}"
+        },
+
+    });
+    map.add(speciesLayer)
 
     map.add(layer);
 
